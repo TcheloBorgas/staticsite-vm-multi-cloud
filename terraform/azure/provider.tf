@@ -15,8 +15,8 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "rg-default-tchelo"
-    storage_account_name = "staticsitevmkbtf001"
-    container_name       = "tfstate"
+    storage_account_name = "tfstate5550123"
+    container_name       = "tchelocont"
     key                  = "terraform.tfstate"
   }
 }
