@@ -5,11 +5,11 @@ resource "azurerm_public_ip" "public-ip" {
   allocation_method   = "Dynamic"
   domain_name_label   = "${var.fqdn}"
 }
-
 resource "azurerm_network_security_group" "nsg" {
   name                = "staticsite-vm-nsg"
-  location            = "${var.location}"
-  resource_group_name = "${var.rg_name}"
+  location            = var.location
+  resource_group_name = var.rg_name
+  
   security_rule {
     name                       = "SSH"
     priority                   = 1001
@@ -21,18 +21,20 @@ resource "azurerm_network_security_group" "nsg" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
+
   security_rule {
-    name                       = "HTTP"
-    priority                   = 1021
+    name                       = "HTTPS"
+    priority                   = 1031
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "80"
+    destination_port_range     = "443"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
 }
+
 
 resource "azurerm_network_interface" "nic" {
   name                = "staticsite-vm-nic"
