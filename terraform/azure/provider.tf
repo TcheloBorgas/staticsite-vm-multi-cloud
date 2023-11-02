@@ -32,4 +32,3 @@ provider "azurerm" {
 
 # provider "azapi" {
 # }
-
